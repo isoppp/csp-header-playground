@@ -1,7 +1,8 @@
-html {
-  font-size: 50px;
-}
-
 .hello {
+  font-size: 40px;
   color: blue;
+
+  &:after {
+    content: "This text is set by CSS!";
+  }
 }
