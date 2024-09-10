@@ -1,0 +1,16 @@
+{
+  "name": "csp-header-playground",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "format": "pnpm biome check --write"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.12.2",
+    "hono": "^4.5.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "biome": "^0.3.3",
+    "tsx": "^4.7.1"
+  }
+}
