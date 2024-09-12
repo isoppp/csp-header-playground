@@ -28,13 +28,17 @@ app.use(
   }),
 )
 
-const Sample: FC<{ pathname: string; nonce?: string }> = ({ nonce }) => {
+const Sample: FC<{ nonce?: string }> = ({ nonce }) => {
   return (
     <html>
       <head>
         <title>CSP Header Playground</title>
         <link rel='stylesheet' href={withBasePath('/public/sample.css')} />
         <script src={withBasePath('/public/sample.js')} nonce={nonce} />
+        <script
+          src={withBasePath('/public/sri.js')}
+          integrity='sha384-/doZCgovgquDhrQ5Q0pGiHd1SF1MJcNUBHySFRnxTP1gnbiXQCmijJwiMSnps/zU'
+        />
       </head>
       <body>
         <div style={{ display: 'flex', gap: '20px', padding: '10px', borderBottom: '2px solid gray' }}>
@@ -63,7 +67,7 @@ app.use(
       },
     ],
     contentSecurityPolicy: {
-      defaultSrc: [''],
+      defaultSrc: ['none'],
       reportTo: 'csp-endpoint',
       // connectSrc: ["'self'"],
       // imgSrc: ["'self'", 'data:'],
@@ -93,6 +97,7 @@ app.use(
   secureHeaders({
     contentSecurityPolicy: {
       scriptSrc: [(c) => `'nonce-${c.get('nonce')}'`],
+      // scriptSrc: [(c) => `'strict-dynamic' 'nonce-${c.get('nonce')}'`],
     },
   }),
 )
